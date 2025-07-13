@@ -1,19 +1,6 @@
-import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
 import './NewPost.css'
 
 const NewPost = () => {
-  const { register, handleSubmit, reset, formState: { errors, isSubmitting } } =
-    useForm({
-      defaultValues: {
-        title: '',
-        content: '',
-        category: '',
-        author: '',
-        publishDate: ''
-      }
-    })
-
   const onSubmit = async (data) => {
     try {
       // Simular envío de datos
@@ -21,7 +8,6 @@ const NewPost = () => {
       console.log('Datos del post:', data)
       alert('¡Post creado exitosamente!')
       // TODO: Añadir reset
-      reset()
     } catch (error) {
       console.error('Error al crear el post:', error)
       alert('Error al crear el post. Intenta nuevamente.')
@@ -57,7 +43,6 @@ const NewPost = () => {
             id='title'
             className='form-input' // TODO: Añadir clase de error si hay errores
             placeholder='Ingresa un título para tu post'
-            {...register('title')}
           // TODO: Registrar input title
           />
           {/* TODO: Mostrar mensaje de error */}
@@ -72,7 +57,6 @@ const NewPost = () => {
             rows='6'
             className='form-textarea' // TODO: Añadir clase de error si hay
             placeholder='Escribe el contenido de tu post aquí...'
-            {...register('content')}
           // TODO: Registrar input content
           />
           {/* TODO: Mostrar mensaje de error */}
@@ -86,7 +70,6 @@ const NewPost = () => {
             <select
               id='category'
               className='form-select ' // TODO: Añadir clase de error si hay
-              {...register('category')}
             // TODO: Registrar input category
             >
               <option value=''>Selecciona una categoría</option>
@@ -108,8 +91,7 @@ const NewPost = () => {
               id='author'
               className='form-input ' // TODO: Añadir clase de error si hay
               placeholder='Tu nombre'
-              // TODO: Registrar input author
-              {...register('author')}
+            // TODO: Registrar input author
             />
             {/* TODO: Mostrar mensaje de error */}
           </div>
@@ -123,7 +105,6 @@ const NewPost = () => {
             type='datetime-local'
             id='publishDate'
             className='form-input ' // TODO: Añadir clase de error si hay
-            {...register('publishDate')}
           // TODO: Registrar input publishDate
           />
           {/* TODO: Mostrar mensaje de error */}
@@ -141,11 +122,10 @@ const NewPost = () => {
             type='button'
             className='btn btn-primary'
             // TODO: Añadir lógica para deshabilitar si se esta enviando el formulario.
-            disabled={isSubmitting}
-            onClick={handleSubmit(onSubmit)} // TODO: Actualizar función de envío
+            onClick={(onSubmit)} // TODO: Actualizar función de envío
           >
             {/* TODO: Añadir texto condicional al botón */}
-            {isSubmitting ? 'Publicando... ' : 'Publicar Post'}
+            Publicar Post
           </button>
         </div>
       </div>
